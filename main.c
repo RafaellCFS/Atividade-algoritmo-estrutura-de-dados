@@ -1,11 +1,18 @@
 #include <stdio.h>
-#include "calculadora.h"
+#include "conversor.h"
 
 int main(void){
-    int v1, v2;
-    printf("Digite os dois valores inteiros: ");
-    scanf("%d %d",&v1, &v2);
-    int soma_v = soma(v1, v2);
-    printf("A soma: %d", soma_v);
+    float metros;
+    printf("Digite o valor em metros: ");
+    scanf("%f", &metros);
+
+    float cm = MparaC(metros);
+    float km = MparaQ(metros);
+    float mm = MparaMili(metros);
+
+    printf("Centimetros: %f\n", cm);
+    printf("Quilometros: %f\n", km);
+    printf("Milimetros:  %f\n", mm);
+
     return 0;
 }
