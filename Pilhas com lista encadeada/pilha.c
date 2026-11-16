@@ -10,17 +10,14 @@ typedef struct Pilha {
     No *topo;
 } Pilha;
 
-/* Inicializar a pilha: topo recebe NULL */
 void inicializar(Pilha *pilha) {
     pilha->topo = NULL;
 }
 
-/* Retorna 1 se vazia, 0 caso contrario */
 int estaVazia(Pilha *pilha) {
     return pilha->topo == NULL;
 }
 
-/* PUSH: insere no topo. Retorna 1 em sucesso, 0 se falhar a alocacao */
 int push(Pilha *pilha, int valor) {
     No *novo = (No *) malloc(sizeof(No));
     if (novo == NULL) {
@@ -28,30 +25,22 @@ int push(Pilha *pilha, int valor) {
         return 0;
     }
     novo->dado = valor;
-    novo->proximo = pilha->topo;   /* novo no aponta para o antigo topo */
-    pilha->topo = novo;            /* atualiza o topo */
+    novo->proximo = pilha->topo;   
+    pilha->topo = novo;            
     return 1;
 }
 
-/*
- * POP: remove o elemento do topo.
- * Estrategia: o valor removido e devolvido por ponteiro (parametro "valor")
- * e o retorno da funcao indica sucesso (1) ou falha (0, pilha vazia).
- * Assim, qualquer inteiro (inclusive -1 ou 0) pode ser um dado valido
- * sem ser confundido com um codigo de erro.
- */
 int pop(Pilha *pilha, int *valor) {
     if (estaVazia(pilha)) {
         return 0;
     }
-    No *remover = pilha->topo;         /* guarda o endereco do no */
-    *valor = remover->dado;            /* guarda o valor */
-    pilha->topo = remover->proximo;    /* atualiza o topo */
-    free(remover);                     /* libera o no removido */
+    No *remover = pilha->topo;         
+    *valor = remover->dado;            
+    pilha->topo = remover->proximo;    
+    free(remover);                     
     return 1;
 }
 
-/* PEEK: consulta o topo sem remover. Retorna 1 em sucesso, 0 se vazia */
 int peek(Pilha *pilha, int *valor) {
     if (estaVazia(pilha)) {
         return 0;
@@ -60,7 +49,6 @@ int peek(Pilha *pilha, int *valor) {
     return 1;
 }
 
-/* Imprime do topo para a base usando ponteiro auxiliar */
 void imprimirPilha(Pilha *pilha) {
     if (estaVazia(pilha)) {
         printf("Pilha vazia.\n");
@@ -95,7 +83,6 @@ void liberarPilha(Pilha *pilha) {
     pilha->topo = NULL;
 }
 
-/* Le um inteiro com validacao; retorna 1 se leu, 0 se EOF */
 static int lerInteiro(const char *msg, int *out) {
     int c;
     printf("%s", msg);
